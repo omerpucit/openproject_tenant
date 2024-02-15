@@ -1,0 +1,14 @@
+<% html_title t(:label_tenants) %>
+
+<% html_title t(:label_administration), t(:label_tenant_plural) %>
+<%= toolbar title: Tenant.model_name.human(count: 2) do %>
+  <li class="toolbar-item">
+    <a href="<%= new_admin_settings_tenant_path %>" aria-label="<%= t(:button_add_tenant) %>" title="<%= t(:button_add_tenant) %>" class="button -alt-highlight">
+      <%= op_icon('button--icon icon-add') %>
+      <span class="button--text"><%= Tenant.model_name.human %></span>
+    </a>
+  </li>
+<% end %>
+
+
+<%= render partial: 'list' %>

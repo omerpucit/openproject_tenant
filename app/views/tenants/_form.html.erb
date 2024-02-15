@@ -1,0 +1,29 @@
+<%= labelled_tabular_form_for(tenant, url: { action: tenant.new_record? ? :create : :update }) do |f| %>
+
+<%= error_messages_for tenant %>
+
+<section class="form--section">
+  <div class="form--field -required">
+    <%= f.text_field :name, required: true %>
+  </div>
+  <div class="form--field -required">
+    <%= f.text_field :sub_domain, required: true %>
+  </div>
+  <div class="form--field -required">
+    <%= f.text_field :email, required: true %>
+  </div>
+  <div class="form--field -required">
+    <%= f.text_field :password, required: true %>
+  </div>
+  <div class="form--field -required">
+    <%= f.text_field :username, required: true %>
+  </div>
+
+    <div class="widget-box--blocks--buttons">
+        <button type="submit" class="button -alt-highlight" title="New Tenant">
+            <span class="button--text"><%= t(:button_create) %></span>
+        </button>
+    </div>
+</section>
+
+<% end %>

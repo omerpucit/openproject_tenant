@@ -1,0 +1,23 @@
+<% html_title t(:label_tenants) %>
+
+<%= toolbar(title: t(:label_tenants)) do %>
+  <%# if current_user.allowed_globally?(:manage_tenants) %>
+<!--    <li class="toolbar-item">-->
+      <%#= link_to(new_multi_tenant_tenant_path, class: 'button') do %>
+<!--        <span class="button--text"><%#= t(:label_tenant_new) %></span>-->
+      <%# end %>
+<!--    </li>-->
+  <%# end %>
+<% end %>
+
+
+<% if @tenants.empty? %>
+  <%= no_results_box %>
+<% else %>
+  <p>
+    These are the Tenants:
+  </p>
+  <% @tenants.each do |tenant| %>
+    <%= tag 'tenant-component', data: { 'tenant': tenant } %>
+  <% end %>
+<% end %>

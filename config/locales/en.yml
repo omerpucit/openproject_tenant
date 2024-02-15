@@ -1,0 +1,22 @@
+en:
+  activerecord:
+    models:
+      tenant:
+        one: 'Tenant'
+  plugin_openproject_tenant:
+    name: "Tenants"
+    description: "This module adds features for adding new tenants."
+  label_tenants: Tenants
+  label_tenant: Tenant
+  label_tenant_new: New Tenant
+  label_tenant_edit: Edit Tenant
+  label_tenant_delete: Delete Tenant
+  label_tenant_plural: "Tenants"
+  button_add_tenant: 'Add Tenant'
+  label_tenant_specific: "Tenant #%{id}: %{name} - %{sub_domain}"
+  subdomain_validation:
+    errors:
+      messages:
+        label: ''
+        first_character: 'First Character'
+        last_character: 'Last Character'

@@ -1,0 +1,34 @@
+<% if(@tenant.id) %>
+  <% html_title  t(:label_tenant_specific, id: @tenant.id, name: @tenant.name, sub_domain: @tenant.sub_domain) %>
+  <% local_assigns[:additional_breadcrumb] = @tenant.sub_domain %>
+<% else %>
+  <% html_title t(:label_administration), t(:label_tenant_plural) %>
+  <% local_assigns[:additional_breadcrumb] = t(:label_new) + ' ' + I18n.t('activerecord.models.tenant.one') %>
+<% end %>
+
+
+<%= toolbar title: Tenant.model_name.human %>
+
+<tenant-subform>
+<%= labelled_tabular_form_for [:admin, :settings, @tenant] do |f| %>
+  <%= error_messages_for 'tenant' %>
+  <%= back_url_hidden_field_tag %>
+
+  <div class="form--field -required">
+    <%= f.text_field :name, required: true, container_class: '-middle' %>
+  </div>
+  <div class="form--field -required">
+    <%= f.text_field :sub_domain, required: true, container_class: '-middle' %>
+  </div>
+  <div class="form--field -required">
+    <%= f.text_field :email, required: true, container_class: '-middle' %>
+  </div>
+  <div class="form--field -required">
+    <%= f.text_field :username, required: true, container_class: '-middle' %>
+  </div>
+  <div class="form--field -required">
+    <%= f.text_field :password, required: true, container_class: '-middle' %>
+  </div>
+  <%= styled_button_tag t(:button_save), class: '-with-icon icon-checkmark' %>
+<% end %>
+</tenant-subform>

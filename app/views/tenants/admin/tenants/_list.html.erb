@@ -1,0 +1,69 @@
+<% if @tenants.empty? %>
+  <%= no_results_box %>
+<% else %>
+  <div class="generic-table--container">
+    <div class="generic-table--results-container">
+      <table class="generic-table">
+        <colgroup>
+          <col opHighlightCol>
+          <col opHighlightCol>
+          <col opHighlightCol>
+          <col opHighlightCol>
+          <col opHighlightCol>
+        </colgroup>
+        <thead>
+          <tr>
+            <%= sort_header_tag 'name', :caption => Tenant.human_attribute_name(:name) %>
+            <%= sort_header_tag 'sub_domain', :caption => Tenant.human_attribute_name(:sub_domain) %>
+            <th>
+              <div class="generic-table--sort-header-outer">
+                <div class="generic-table--sort-header">
+                  <span>
+                    <%= Tenant.human_attribute_name(:email) %>
+                  </span>
+                </div>
+              </div>
+            </th>
+            <th>
+              <div class="generic-table--sort-header-outer">
+                <div class="generic-table--sort-header">
+                  <span>
+                    <%= Tenant.human_attribute_name(:username) %>
+                  </span>
+                </div>
+              </div>
+            </th>
+            <th><div class="generic-table--empty-header"></div></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @tenants.each do |tenant| %>
+          <tr>
+            <%= content_tag :td, tenant.name %>
+            <%= content_tag :td, tenant.sub_domain %>
+            <%= content_tag :td, tenant.first_email %>
+            <%= content_tag :td, tenant.first_username %>
+            <td class="buttons">
+              <%= form_for tenant, url:    admin_settings_tenant_path(tenant),
+                                      method: :delete,
+                                      html:   { id:    "delete_tenant_#{tenant.id}",
+                                                class: 'delete_tenant',
+                                                title: t(:button_delete)
+                                      } do |f| %>
+                <button type="submit"
+                        class="button--link submit_cost_type"
+                >
+                  <%= icon_wrapper('icon icon-delete', I18n.t(:button_delete)) %>
+                </button>
+              <% end %>
+            </td>
+          </tr>
+          <tr style="display:none;" >
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+<% end %>
