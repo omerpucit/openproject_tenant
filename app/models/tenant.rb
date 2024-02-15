@@ -14,7 +14,7 @@ class Tenant < ApplicationRecord
   validates :username, format: { with: /\A[a-z0-9_\-@.+ ]*\z/i }
   validates :username, length: { maximum: 256 }
   validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create }
-  validates :password, length: 6..20, on: :create
+  validates :password, length: 5..20, on: :create
 
   def switch
     ::Apartment::Tenant.switch(id) do

@@ -22,7 +22,7 @@ module OpenProject::Tenant
            :tenants_admin_tenants,
            { controller: '/tenants/admin/tenants', action: :index },
            if: ->(*) {
-             User.current.admin? && ::Apartment::Tenant.current_tenant && ::Apartment::Tenant.current_tenant.current_admin?
+             User.current.admin? && ::Apartment::Tenant.public?
            },
            #parent: :admin_costs,
            caption: :label_tenant_plural,

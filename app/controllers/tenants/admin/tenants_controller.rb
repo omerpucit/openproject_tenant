@@ -53,10 +53,8 @@ class Tenants::Admin::TenantsController < ApplicationController
   end
 
   def destroy
-    if @tenant.can_destroy?
-      @tenant.destroy
-    else
-      flash[:error] = 'Cannot delete admin tenant'
+    unless @tenant.destroy
+      flash[:error] = 'unable to delete tenant'
     end
     redirect_back_or_default(action: 'index')
   end
@@ -68,8 +66,7 @@ class Tenants::Admin::TenantsController < ApplicationController
   end
 
   def require_admin_sub_domain
-    is_allowed = ::Apartment::Tenant.current_tenant && ::Apartment::Tenant.current_tenant.current_admin?
-    unless is_allowed
+    unless ::Apartment::Tenant.public?
       return deny_access
     end
   end

@@ -22,10 +22,10 @@ module SubdomainValidation
       case options[:reserved_name]
       when nil
         if Rails.env.development?
-          %w[www http https ftp sftp ssl ns mx pop smtp administrator ass fuck staging mail users host spam api]
+          %w[www http https ftp sftp ssl ns mx pop smtp admin administrator ass fuck staging mail users host spam api]
         else
-          %w[www http https ftp sftp ssl ns mx pop smtp administrator ass fuck mail users host spam api
-             dev development staging www1 www2 www3 www4
+          %w[www http https ftp sftp ssl ns mx pop smtp admin administrator ass fuck mail users host spam api
+           www1 www2 www3 www4 email
           ]
         end
       when false
