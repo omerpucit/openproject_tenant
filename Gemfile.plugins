@@ -3,6 +3,5 @@
 # whereas OpenProject will be checked out to `.`.
 
 group :opf_plugins do
-  gem 'openproject-tenant', path: 'plugins/this'
   gem 'activesupport', '~> 5.0.0'
 end

@@ -4,6 +4,11 @@ require 'open_project/plugins'
 require 'apartment/elevators/first_subdomain'
 
 module OpenProject::Tenant
+  # class Railtie < ::Rails::Railtie
+  #   config.after_initialize do
+  #     Delayed::Job.include(OpenProject::Tenant::Tenancy)
+  #   end
+  # end
   class Engine < ::Rails::Engine
     engine_name :openproject_tenant
 
@@ -43,6 +48,13 @@ module OpenProject::Tenant
     initializer "open_project.apartment.override_warning_bar_helper" do
       config = OpenProject::Configuration
       Rails.application.config.session_store :cookie_store, key: config['session_cookie_name'], tld_length: 1
+      ::Delayed::Backend::ActiveRecord::Job.table_name = 'public.delayed_jobs'
+      ActiveJob::Base.send(:include, OpenProject::Tenant::Tenancy)
+      if ActiveJob::QueueAdapters::DelayedJobAdapter.respond_to?(:enqueue)
+        ActiveJob::QueueAdapters::DelayedJobAdapter.extend(OpenProject::Tenant::DelayedTenancy)
+      else
+        ActiveJob::QueueAdapters::DelayedJobAdapter.send(:include, OpenProject::Tenant::DelayedTenancy)
+      end
       ActiveSupport.on_load(:after_initialize) do
         ::WarningBarHelper.prepend OpenProject::Tenant::GemOverrides
       end

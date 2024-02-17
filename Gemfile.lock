@@ -184,6 +184,7 @@ PLATFORMS
   x86_64-darwin-19
 
 DEPENDENCIES
+  activejob
   openproject-tenant!
 
 BUNDLED WITH

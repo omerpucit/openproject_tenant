@@ -14,5 +14,6 @@ Gem::Specification.new do |s|
   s.license     = "MIT" # e.g. "MIT" or "GPLv3"
 
   s.files = Dir["{app,config,db,lib}/**/*"] + %w(CHANGELOG.md README.md)
+  s.require_paths = ["lib"]
   s.add_dependency "rails", '~> 7.0'
 end
