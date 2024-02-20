@@ -52,6 +52,7 @@ class Tenant < ApplicationRecord
     ::Apartment::Tenant.create(id.to_s) do
       user = new_admin
       user.save!(validate: false)
+      RootSeeder.new.seed!
     end
     # begin
     #
