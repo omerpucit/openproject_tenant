@@ -13,7 +13,9 @@ class Tenants::Admin::TenantsController < ApplicationController
 
   def index
     sort_init 'name', 'asc'
-    sort_columns = { 'name' => "#{Tenant.table_name}.name",
+    sort_columns = {
+		     'id' => "#{Tenant.table_name}.id",
+		     'name' => "#{Tenant.table_name}.name",
                      'sub_domain' => "#{Tenant.table_name}.sub_domain"
                    }
     sort_update sort_columns

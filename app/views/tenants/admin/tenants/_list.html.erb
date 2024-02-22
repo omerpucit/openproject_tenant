@@ -5,6 +5,7 @@
     <div class="generic-table--results-container">
       <table class="generic-table">
         <colgroup>
+ 	  <col opHighlightCol>
           <col opHighlightCol>
           <col opHighlightCol>
           <col opHighlightCol>
@@ -13,6 +14,7 @@
         </colgroup>
         <thead>
           <tr>
+ 	    <%= sort_header_tag 'id', :caption => Tenant.human_attribute_name(:id) %>
             <%= sort_header_tag 'name', :caption => Tenant.human_attribute_name(:name) %>
             <%= sort_header_tag 'sub_domain', :caption => Tenant.human_attribute_name(:sub_domain) %>
             <th>
@@ -39,6 +41,7 @@
         <tbody>
           <% @tenants.each do |tenant| %>
           <tr>
+	    <%= content_tag :td, tenant.id %>
             <%= content_tag :td, tenant.name %>
             <%= content_tag :td, tenant.sub_domain %>
             <%= content_tag :td, tenant.first_email %>
@@ -48,7 +51,8 @@
                                       method: :delete,
                                       html:   { id:    "delete_tenant_#{tenant.id}",
                                                 class: 'delete_tenant',
-                                                title: t(:button_delete)
+                                                title: t(:button_delete),
+                                                data: { confirm: 'Are you sure?' }
                                       } do |f| %>
                 <button type="submit"
                         class="button--link submit_cost_type"
